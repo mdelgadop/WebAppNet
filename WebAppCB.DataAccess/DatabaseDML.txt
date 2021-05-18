@@ -1,0 +1,40 @@
+﻿
+DROP TABLE IF EXISTS direcciones;
+
+CREATE TABLE direcciones (
+  direccion_id BIGINT NOT NULL AUTO_INCREMENT,
+  puerta VARCHAR(255) NOT NULL,
+  tipovia INT NOT NULL,
+  piso VARCHAR(255) NOT NULL,
+  ubicacion VARCHAR(255) NOT NULL,
+  nombrevia VARCHAR(255) NOT NULL,
+  portalnumero VARCHAR(255) NOT NULL,
+  codigopostal VARCHAR(255) NOT NULL,
+  coordenadax INT NOT NULL,
+  coordenaday INT NOT NULL,
+  PRIMARY KEY (direccion_id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS municipios;
+
+CREATE TABLE municipios (
+  municipio_id BIGINT NOT NULL AUTO_INCREMENT,
+  pais VARCHAR(255) NOT NULL,
+  codigo VARCHAR(255) NOT NULL,
+  nombre VARCHAR(255) NOT NULL,
+  PRIMARY KEY (municipio_id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS deas;
+
+CREATE TABLE deas (
+  dea_id BIGINT NOT NULL AUTO_INCREMENT,
+  codigo VARCHAR(255) NOT NULL,
+  tipoestablecimiento INT NOT NULL,
+  tipotitularidad INT NOT NULL,
+  horarioacceso VARCHAR(255) NOT NULL,
+  direccion_id BIGINT,
+  municipio_id BIGINT,
+  PRIMARY KEY (dea_id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

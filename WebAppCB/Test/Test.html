@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="./js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <script src="./js/test.js"></script>
+    <script src="./js/refill.js"></script>
+    <script>
+        
+
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="eping-tab" data-bs-toggle="tab" data-bs-target="#eping" type="button" role="tab" aria-controls="eping" aria-selected="true">Echoping</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="listar-tab" data-bs-toggle="tab" data-bs-target="#listar" type="button" role="tab" aria-controls="listar" aria-selected="false">Listar</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="buscar-tab" data-bs-toggle="tab" data-bs-target="#buscar" type="button" role="tab" aria-controls="buscar" aria-selected="false">Buscar</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="crear-tab" data-bs-toggle="tab" data-bs-target="#crear" type="button" role="tab" aria-controls="crear" aria-selected="false">Crear</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="nearest-tab" data-bs-toggle="tab" data-bs-target="#nearest" type="button" role="tab" aria-controls="nearest" aria-selected="false">El más cercano</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="refill-tab" data-bs-toggle="tab" data-bs-target="#refill" type="button" role="tab" aria-controls="refill" aria-selected="false">Rellenar BD</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="eping" role="tabpanel" aria-labelledby="eping-tab">
+                <br />
+                <div class="container">
+                    <button onclick="echoping()">Echoping</button>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="listar" role="tabpanel" aria-labelledby="listar-tab">
+                <br />
+                <div class="container">
+                    <div class="row">
+                        <div class="form-check col">
+                            <input class="form-check-input" type="checkbox" value="" id="listarOrderByMunicipio">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Ordenado por Municipio
+                            </label>
+                        </div>
+                        <div class="form-check col">
+                            <input class="form-check-input" type="checkbox" value="" id="listarOrderByCodigoPostal">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Ordenado por Codigo Postal
+                            </label>
+                        </div>
+                        <div class="form-check col">
+                            <input class="form-check-input" type="checkbox" name="listarIsPrivadoPublico" id="listarIsPublico">
+                            <label class="form-check-label" for="listarIsPublico">
+                                Público
+                            </label>
+                        </div>
+                        <div class="form-check col">
+                            <input class="form-check-input" type="checkbox" name="listarIsPrivadoPublico" id="listarIsPrivado">
+                            <label class="form-check-label" for="listarIsPrivado">
+                                Privado
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="listarFilterMunicipioCode" class="form-label">Código de Municipio</label>
+                            <input class="form-control" type="text" value="" aria-label="default input example" id="listarFilterMunicipioCode">
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="listarFilterMunicipioNombre" class="form-label">Nombre de Municipio</label>
+                            <input class="form-control" type="text" value="" aria-label="default input example" id="listarFilterMunicipioNombre">
+                        </div>
+                    </div>
+
+                    <button onclick="list()">Listar</button>
+                    <br />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">CODIGO DEA</th>
+                                <th scope="col">Horario</th>
+                                <th scope="col">Nombre Via</th>
+                                <th scope="col">Numero</th>
+                                <th scope="col">Municipio</th>
+                                <th scope="col">Ubicación</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listarBody"></tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="buscar" role="tabpanel" aria-labelledby="buscar-tab">
+                <br />
+                <div class="container">
+                    <div class="row">
+                        <div class="mb-3 col">
+                            Codigo: 
+                            <input class="form-control" type="text" value="2021-74" aria-label="default input example" id="buscarCodigo">
+                        </div>
+                        <div class="mb-3 col">
+                            <br/>
+                            <button onclick="search()">Buscar</button>
+                        </div>
+                    </div>
+                    <div id="buscarResultado"></div>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="crear" role="tabpanel" aria-labelledby="crear-tab">
+                <br />
+                <div class="container">
+
+                    <form>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="crearCodigo" class="form-label">Codigo</label>
+                                <input class="form-control" type="text" value="2021-88" aria-label="default input example" id="crearCodigo">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="crearHorarioAcceso" class="form-label">Horario Acceso</label>
+                                <input class="form-control" type="text" value="L-D 9-21" aria-label="default input example" id="crearHorarioAcceso">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="crearTipoTitularidad" class="form-label">Tipo Titularidad</label>
+                                <select class="form-select" aria-label="Default select example" id="crearTipoTitularidad">
+                                    <option value="0">Pública</option>
+                                    <option value="1">Privada</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="crearTipoEstablecimiento" class="form-label">Tipo Establecimiento</label>
+                                <select class="form-select" aria-label="Default select example" id="crearTipoEstablecimiento">
+                                    <option value="0">Establecimiento dependiente de una Administración Pública</option>
+                                    <option value="1">Instalación, centro o complejo deportivo con más de 500 usuarios diarios</option>
+                                    <option value="2">Instalaciones de transporte</option>
+                                    <option value="3">Centro de trabajo con más de 250 trabajadores</option>
+                                    <option value="4">Establecimiento público con aforo igual o superior a 2000 personas</option>
+                                    <option value="5">Establecimiento hotelero con más de 100 plazas</option>
+                                    <option value="6">Centro educativo</option>
+                                    <option value="7">Grandes establecimientos comerciales con una superficie superior a 2500 m2</option>
+                                    <option value="8">Aeropuertos</option>
+                                    <option value="9">Centros residenciales de mayores con 200 plazas</option>
+                                    <option value="10" selected>Otros</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="crearDireccionCoordenadaX" class="form-label">Coordenada X</label>
+                                <input class="form-control" type="text" value="-401882" aria-label="default input example" id="crearDireccionCoordenadaX">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="crearDireccionCoordenadaY" class="form-label">Coordenada Y</label>
+                                <input class="form-control" type="text" value="4055964" aria-label="default input example" id="crearDireccionCoordenadaY">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="crearMunicipioCodigo" class="form-label">Codigo Municipio</label>
+                                <input class="form-control" type="text" value="079" aria-label="default input example" id="crearMunicipioCodigo">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="crearMunicipioNombre" class="form-label">Nombre Municipio</label>
+                                <input class="form-control" type="text" value="Madrid" aria-label="default input example" id="crearMunicipioNombre">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="crearDireccionTipoVia" class="form-label">Direccion - Tipo Via</label>
+                                <select class="form-select" aria-label="Default select example" id="crearDireccionTipoVia">
+                                    <option value="0">CALLE</option>
+                                    <option value="1">RONDA</option>
+                                    <option value="2">AVDA</option>
+                                    <option value="3" selected>PASEO</option>
+                                    <option value="4">CUSTA</option>
+                                    <option value="5">CRA</option>
+                                    <option value="6">PLAZA</option>
+                                    <option value="7">CTRA</option>
+                                    <option value="8">CMNO</option>
+                                    <option value="9">BULEV</option>
+                                    <option value="10">GTA</option>
+                                    <option value="11">PQUE</option>
+                                    <option value="12">CLLON</option>
+                                    <option value="13">TRVA</option>
+                                    <option value="14">CÑADA</option>
+                                    <option value="15">ZONA</option>
+                                    <option value="16">VREDA</option>
+                                    <option value="17">LUGAR</option>
+                                    <option value="18">SENDA</option>
+                                    <option value="19">FINCA</option>
+                                    <option value="20">PRAJE</option>
+                                    <option value="21">SECT</option>
+                                    <option value="22">URB</option>
+                                    <option value="23">AVIA</option>
+
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="crearDireccionNombreVia" class="form-label">Direccion - Nombre Via</label>
+                                <input class="form-control" type="text" value="de la Chaparra" aria-label="default input example" id="crearDireccionNombreVia">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="crearDireccionPortalNumero" class="form-label">Direccion - Portal Numero</label>
+                                <input class="form-control" type="text" value="15" aria-label="default input example" id="crearDireccionPortalNumero">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="crearDireccionCodigoPostal" class="form-label">Direccion - Codigo Postal</label>
+                                <input class="form-control" type="text" value="28270" aria-label="default input example" id="crearDireccionCodigoPostal">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="crearDireccionPuerta" class="form-label">Direccion - Puerta</label>
+                                <input class="form-control" type="text" value="ES" aria-label="default input example" id="crearDireccionPuerta">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="crearDireccionPiso" class="form-label">Direccion - Piso</label>
+                                <input class="form-control" type="text" value="Bajo" aria-label="default input example" id="crearDireccionPiso">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="crearDireccionUbicacion" class="form-label">Direccion - Ubicacion</label>
+                                <input class="form-control" type="text" value="PLANTA BAJA" aria-label="default input example" id="crearDireccionUbicacion">
+                            </div>
+                        </div>
+                    </form>
+
+                <button onclick="create()">Crear</button>
+                    <br/>
+            </div>
+
+            </div>
+            <div class="tab-pane fade" id="nearest" role="tabpanel" aria-labelledby="nearest-tab">
+                <br />
+                <div class="container">
+                    <div class="row">
+                        <div class="mb-3 col">
+                            Y;
+                            <input class="form-control" type="text" value="4055900" aria-label="default input example" id="nearestY">
+                        </div>
+                        <div class="mb-3 col">
+                            X;
+                            <input class="form-control" type="text" value="-401880" aria-label="default input example" id="nearestX">
+                        </div>
+                        <div class="mb-3 col">
+                            <br />
+                            <button onclick="Nearest()">El más cercano</button>
+                        </div>
+                    </div>
+                    <div id="nearestResultado"></div>
+
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="refill" role="tabpanel" aria-labelledby="refill-tab">
+                <br />
+                <div class="container">
+                    <button onclick="Refill()">Rellenar BD</button>
+                    <br />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">CODIGO DEA</th>
+                                <th scope="col">Nombre Via</th>
+                                <th scope="col">Numero</th>
+                            </tr>
+                        </thead>
+                        <tbody id="refillBody">
+                                
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

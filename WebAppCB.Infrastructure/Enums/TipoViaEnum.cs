@@ -1,0 +1,30 @@
+namespace Infrastructure.Enums
+{
+    public enum TipoViaEnum
+    {
+        CALLE,
+        RONDA,
+        AVDA,
+        PASEO,
+        CUSTA,
+        CRA,
+        PLAZA,
+        CTRA,
+        CMNO,
+        BULEV,
+        GTA,
+        PQUE,
+        CLLON,
+        TRVA,
+        CNADA,
+        ZONA,
+        VREDA,
+        LUGAR,
+        SENDA,
+        FINCA,
+        PRAJE,
+        SECT,
+        URB,
+        AVIA
+    }
+}
