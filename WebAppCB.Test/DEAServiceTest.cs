@@ -50,6 +50,30 @@ namespace WebAppCB.Test
             Assert.IsTrue(response2.DEAList.Count == 6);
         }
 
+        [TestMethod]
+        public void TestNearestLessThan1Km()
+        {
+            IDEAService service = DEAServiceFactory.CreateMock();
+
+            ClosestDEAResponse response = service.GetClosestDEA(new ClosestDEARequest() { CoordenadaY = 4473020, CoordenadaX = 440640 });
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual(response.DEAElement.Codigo, "2021-48");
+            Assert.IsTrue(response.LessThan1Km);
+        }
+
+        [TestMethod]
+        public void TestNearestMoreThan1Km()
+        {
+            IDEAService service = DEAServiceFactory.CreateMock();
+
+            ClosestDEAResponse response = service.GetClosestDEA(new ClosestDEARequest() { CoordenadaY = 4055900, CoordenadaX = 401880 });
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual(response.DEAElement.Codigo, "2021-62");
+            Assert.IsFalse(response.LessThan1Km);
+        }
+
         private DEADto CreateDEAMock()
         {
             DEADto dto = new DEADto()
