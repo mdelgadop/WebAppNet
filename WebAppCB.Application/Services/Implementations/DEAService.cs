@@ -83,7 +83,7 @@ namespace Application.Services.Implementations
                 
                 foreach(DEADto dto in DEAList)
                 {
-                    double distance = helper.Distancia(request.CoordenadaX, dto.Direccion.CoordenadaX, request.CoordenadaY, dto.Direccion.CoordenadaY);
+                    double distance = helper.Distancia(request.CoordenadaX, request.CoordenadaY, dto.Direccion.CoordenadaX, dto.Direccion.CoordenadaY);
                     if(distance < minDistance)
                     {
                         minDistance = distance;
